@@ -1,31 +1,29 @@
 /*
- * process_3.c
+ * process_1.c
  *
  *  Created on: Sep 13, 2023
  *      Author: fil
  */
 
 #include "main.h"
+#include "main.h"
 #include "../../../A_os/kernel/A.h"
 #include "../../../A_os/kernel/A_exported_functions.h"
 #include "../../../A_os/kernel/system_default.h"
 
-#include <stdio.h>
-#include <string.h>
 
-void process_3(uint32_t process_id)
+void process_1(uint32_t process_id)
 {
-	/*
 uint32_t	wakeup;
 
-	create_timer(TIMER_ID_0,800,TIMERFLAGS_FOREVER | TIMERFLAGS_ENABLED);
+	create_timer(TIMER_ID_0,500,TIMERFLAGS_FOREVER | TIMERFLAGS_ENABLED);
 	while(1)
 	{
-		wakeup = wait_event(EVENT_TIMER);
+		wakeup = wait_event(EVENT_TIMER );
 		if (( wakeup & WAKEUP_FROM_TIMER) == WAKEUP_FROM_TIMER)
 		{
-			wakeup=0;
+			HAL_GPIO_TogglePin(LED_1_GPIOPORT, LED_1_GPIOBIT);
 		}
 	}
-	*/
 }
+

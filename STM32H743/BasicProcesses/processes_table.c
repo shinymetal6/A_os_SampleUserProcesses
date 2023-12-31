@@ -14,7 +14,7 @@
 #include <stdio.h>
 
 extern	void process_1(uint32_t process_id);	//This is process1
-extern	void process_2(uint32_t process_id);	//This is process2
+extern	void process_2_fat(uint32_t process_id);	//This is process2
 extern	void process_3(uint32_t process_id);	//This is process3
 extern	void process_4(uint32_t process_id);	//This is process4 of the application
 
@@ -25,7 +25,7 @@ USRprcs_t	UserProcesses[USR_PROCESS_NUMBER] =
 				.stack_size = 1024,
 		},
 		{
-				.user_process = process_2,
+				.user_process = process_2_fat,
 				.stack_size = 1024,
 		},
 		{

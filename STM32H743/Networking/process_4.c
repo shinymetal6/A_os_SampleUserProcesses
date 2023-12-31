@@ -6,8 +6,9 @@
  */
 
 #include "main.h"
-#include "../../A_os/kernel/A.h"
-#include "../../A_os/kernel/A_exported_functions.h"
+#include "../../../A_os/kernel/A.h"
+#include "../../../A_os/kernel/A_exported_functions.h"
+#include "../../../A_os/kernel/system_default.h"
 
 void process_4(uint32_t process_id)
 {

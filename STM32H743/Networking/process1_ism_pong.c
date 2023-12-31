@@ -45,6 +45,7 @@ uint32_t	wakeup;
 		wakeup = wait_event(EVENT_TIMER | EVENT_NRF24L01_IRQ);
 		if (( wakeup & WAKEUP_FROM_TIMER) == WAKEUP_FROM_TIMER)
 		{
+			HAL_GPIO_TogglePin(LED_1_GPIOPORT, LED_1_GPIOBIT);
 
 		}
 		if (( wakeup & WAKEUP_FROM_NRF24L01_IRQ) == WAKEUP_FROM_NRF24L01_IRQ)

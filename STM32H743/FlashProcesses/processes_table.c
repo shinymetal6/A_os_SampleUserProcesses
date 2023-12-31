@@ -8,8 +8,10 @@
 
 #include "main.h"
 #include "../../../A_os/kernel/A.h"
-#include "../../../A_os/kernel/system_default.h"
 #include "../../../A_os/kernel/A_exported_functions.h"
+#include "../../../A_os/kernel/system_default.h"
+#include <string.h>
+#include <stdio.h>
 
 extern	void process_1(uint32_t process_id);	//This is process1
 extern	void process_2(uint32_t process_id);	//This is process2
@@ -20,11 +22,11 @@ USRprcs_t	UserProcesses[USR_PROCESS_NUMBER] =
 {
 		{
 				.user_process = process_1,
-				.stack_size = 8192,
+				.stack_size = 1024,
 		},
 		{
 				.user_process = process_2,
-				.stack_size = 8192,
+				.stack_size = 1024,
 		},
 		{
 				.user_process = process_3,

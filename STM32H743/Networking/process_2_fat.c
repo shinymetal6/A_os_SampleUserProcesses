@@ -5,27 +5,6 @@
  *      Author: fil
  */
 
-#ifdef	NOFAT
-#include "main.h"
-#include "../../../A_os/kernel/A.h"
-#include "../../../A_os/kernel/A_exported_functions.h"
-#include "../../../A_os/kernel/system_default.h"
-
-
-void process_2(uint32_t process_id)
-{
-uint32_t	wakeup;
-
-	create_timer(TIMER_ID_0,1000,TIMERFLAGS_FOREVER | TIMERFLAGS_ENABLED);
-	while(1)
-	{
-		wakeup = wait_event(EVENT_TIMER);
-		if (( wakeup & WAKEUP_FROM_TIMER) == WAKEUP_FROM_TIMER)
-		{
-		}
-	}
-}
-#else
 #include "main.h"
 #include "../../../A_os/kernel/A.h"
 #include "../../../A_os/kernel/A_exported_functions.h"
@@ -107,5 +86,5 @@ uint32_t	wakeup;
 		}
 	}
 }
-#endif
+
 

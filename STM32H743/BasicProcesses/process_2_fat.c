@@ -5,27 +5,6 @@
  *      Author: fil
  */
 
-#ifdef	NOFAT
-#include "main.h"
-#include "../../../A_os/kernel/A.h"
-#include "../../../A_os/kernel/A_exported_functions.h"
-#include "../../../A_os/kernel/system_default.h"
-
-
-void process_2(uint32_t process_id)
-{
-uint32_t	wakeup;
-
-	create_timer(TIMER_ID_0,1000,TIMERFLAGS_FOREVER | TIMERFLAGS_ENABLED);
-	while(1)
-	{
-		wakeup = wait_event(EVENT_TIMER);
-		if (( wakeup & WAKEUP_FROM_TIMER) == WAKEUP_FROM_TIMER)
-		{
-		}
-	}
-}
-#else
 #include "main.h"
 #include "../../../A_os/kernel/A.h"
 #include "../../../A_os/kernel/A_exported_functions.h"
@@ -88,7 +67,7 @@ uint8_t FS_FileOperations(void)
   return 1;
 }
 
-void process_2(uint32_t process_id)
+void process_2_fat(uint32_t process_id)
 {
 uint32_t	wakeup;
 
@@ -99,13 +78,11 @@ uint32_t	wakeup;
 		wakeup = wait_event(EVENT_TIMER);
 		if (( wakeup & WAKEUP_FROM_TIMER) == WAKEUP_FROM_TIMER)
 		{
-			/*
 			if ( FS_FileOperations() == 0 )
 				HAL_GPIO_TogglePin(LED_1_GPIOPORT, LED_1_GPIOBIT);
-*/
-			//FS_FileOperations();
+
 		}
 	}
 }
-#endif
+
 
