@@ -8,7 +8,7 @@
 #include "main.h"
 #include "A_os_includes.h"
 
-__attribute__ ((long_call, section (".code_in_pram")))   void process_2(uint32_t process_id)
+void process_2(uint32_t process_id)
 {
 uint32_t	wakeup;
 	create_timer(TIMER_ID_0,400,TIMERFLAGS_FOREVER | TIMERFLAGS_ENABLED);
