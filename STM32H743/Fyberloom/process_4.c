@@ -83,11 +83,14 @@ void all_off(void)
 
 void process_4(uint32_t process_id)
 {
-uint32_t	wakeup,cycle=0;
+uint32_t	wakeup,flags;
+uint32_t	cycle=0;
 	create_timer(TIMER_ID_0,100,TIMERFLAGS_FOREVER | TIMERFLAGS_ENABLED );
 	while(1)
 	{
-		wakeup = wait_event(EVENT_TIMER);
+		wait_event(EVENT_TIMER);
+		get_wakeup_flags(&wakeup,&flags);
+
 		if (( wakeup & WAKEUP_FROM_TIMER) == WAKEUP_FROM_TIMER)
 		{
 			wakeup=0;

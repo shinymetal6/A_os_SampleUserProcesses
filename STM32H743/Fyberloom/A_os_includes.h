@@ -11,27 +11,22 @@
  * You should have received a copy of the GNU General Public License 
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  *
- * Project : bb1xx_743_00 
+ * Project : fy-201023-01 
 */
 /*
- * process_4_lcd.c
+ * A_os_includes.h
  *
- *  Created on: Jan 3, 2024
+ *  Created on: Jan 2, 2024
  *      Author: fil
  */
 
-#include "main.h"
-#include "A_os_includes.h"
+#ifndef STM32H743_BASICPROCESSES_A_OS_INCLUDES_H_
+#define STM32H743_BASICPROCESSES_A_OS_INCLUDES_H_
 
-void process_4_lcd(uint32_t process_id)
-{
-uint32_t	wakeup;
-	create_timer(TIMER_ID_0,800,TIMERFLAGS_FOREVER | TIMERFLAGS_ENABLED );
-	while(1)
-	{
-		wakeup = wait_event(EVENT_TIMER);
-		if (( wakeup & WAKEUP_FROM_TIMER) == WAKEUP_FROM_TIMER)
-		{
-		}
-	}
-}
+#include "../../../A_os/kernel/A.h"
+#include "../../../A_os/kernel/system_default.h"
+#include "../../../A_os/kernel/A_exported_functions.h"
+#include <stdio.h>
+#include <string.h>
+
+#endif /* STM32H743_BASICPROCESSES_A_OS_INCLUDES_H_ */

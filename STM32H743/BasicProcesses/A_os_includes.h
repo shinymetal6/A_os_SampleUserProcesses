@@ -26,7 +26,6 @@
 #include "../../../A_os/kernel/A.h"
 #include "../../../A_os/kernel/system_default.h"
 #include "../../../A_os/kernel/A_exported_functions.h"
-#include "ff.h"
 #include <stdio.h>
 #include <string.h>
 

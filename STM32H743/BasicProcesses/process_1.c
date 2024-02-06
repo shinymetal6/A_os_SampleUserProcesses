@@ -10,14 +10,17 @@
 
 void process_1(uint32_t process_id)
 {
-uint32_t	wakeup;
-	create_timer(TIMER_ID_0,200,TIMERFLAGS_FOREVER | TIMERFLAGS_ENABLED);
+uint32_t	wakeup,flags;
+
+	create_timer(TIMER_ID_0,500,TIMERFLAGS_FOREVER | TIMERFLAGS_ENABLED);
 	while(1)
 	{
-		wakeup = wait_event(EVENT_TIMER | EVENT_UART3_IRQ);
+		wait_event(EVENT_TIMER );
+		get_wakeup_flags(&wakeup,&flags);
+
 		if (( wakeup & WAKEUP_FROM_TIMER) == WAKEUP_FROM_TIMER)
 		{
-			HAL_GPIO_TogglePin(LED_GPIO_Port, LED_Pin);
+			HAL_GPIO_TogglePin(LED_1_GPIOPORT, LED_1_GPIOBIT);
 		}
 	}
 }

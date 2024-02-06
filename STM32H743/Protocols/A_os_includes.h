@@ -11,35 +11,27 @@
  * You should have received a copy of the GNU General Public License 
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  *
- * Project : fy-201023-00 
+ * Project : fy-201023-01 
 */
 /*
- * process2_lora.c
+ * A_os_includes.h
  *
- *  Created on: Dec 28, 2023
+ *  Created on: Jan 2, 2024
  *      Author: fil
  */
-#include "main.h"
-#include "../../A_os/kernel/A.h"
-#include "../../A_os/kernel/A_exported_functions.h"
-#include "../../A_os/kernel/system_default.h"
 
+#ifndef STM32H743_BASICPROCESSES_A_OS_INCLUDES_H_
+#define STM32H743_BASICPROCESSES_A_OS_INCLUDES_H_
+
+#include "../../../A_os/kernel/A.h"
+#include "../../../A_os/kernel/system_default.h"
+#include "../../../A_os/kernel/A_exported_functions.h"
 #include <stdio.h>
 #include <string.h>
 
-void process2_lora(uint32_t process_id)
-{
-uint32_t	wakeup;
+#define	USE_MODBUS
+#ifndef USE_MODBUS
+#define	USE_XMODEM
+#endif
 
-	sx1278_Init();
-	create_timer(TIMER_ID_0,800,TIMERFLAGS_FOREVER | TIMERFLAGS_ENABLED);
-	while(1)
-	{
-		wakeup = wait_event(EVENT_TIMER);
-		if (( wakeup & WAKEUP_FROM_TIMER) == WAKEUP_FROM_TIMER)
-		{
-			wakeup=0;
-		}
-	}
-}
-
+#endif /* STM32H743_BASICPROCESSES_A_OS_INCLUDES_H_ */
