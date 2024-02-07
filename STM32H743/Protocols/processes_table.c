@@ -8,6 +8,8 @@
 #include "main.h"
 #include "A_os_includes.h"
 
+#ifdef	STM32H743xx
+
 extern	void process_1(uint32_t process_id);		//This is process1
 extern	void process_2(uint32_t process_id);		//This is process2
 extern	void process_3(uint32_t process_id);		//This is process3
@@ -32,3 +34,5 @@ USRprcs_t	UserProcesses[USR_PROCESS_NUMBER] =
 				.stack_size = 1024,
 		}
 };
+
+#endif //#ifdef	STM32H743xx

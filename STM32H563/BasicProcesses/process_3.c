@@ -8,7 +8,7 @@
 #include "main.h"
 #include "A_os_includes.h"
 
-#ifdef	STM32H743xx
+#ifdef	STM32H563xx
 
 void process_3(uint32_t process_id)
 {
@@ -26,4 +26,4 @@ uint32_t	wakeup,flags;
 	}
 }
 
-#endif // #ifdef	STM32H743xx
+#endif // #ifdef	STM32H563xx

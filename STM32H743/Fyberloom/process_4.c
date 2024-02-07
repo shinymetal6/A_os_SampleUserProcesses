@@ -8,6 +8,8 @@
 #include "main.h"
 #include "A_os_includes.h"
 
+#ifdef	STM32H743xx
+
 uint8_t step = 0;
 void step_leds(void)
 {
@@ -106,3 +108,5 @@ uint32_t	cycle=0;
 		}
 	}
 }
+
+#endif // #ifdef	STM32H743xx

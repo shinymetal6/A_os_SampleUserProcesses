@@ -7,6 +7,7 @@
 
 #include "main.h"
 #include "A_os_includes.h"
+#ifdef	STM32H743xx
 
 #ifdef	USE_XMODEM
 #define	xmodem_data_area	0x30000000
@@ -73,4 +74,6 @@ uint32_t	wakeup,flags;
 	}
 }
 #endif
+
+#endif // #ifdef	STM32H743xx
 
