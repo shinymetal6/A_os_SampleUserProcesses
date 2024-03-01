@@ -16,7 +16,7 @@ extern	void process_3(uint32_t process_id);		//This is process3
 extern	void process_4(uint32_t process_id);			//This is process4
 
 
-VERSIONING	uint8_t	app_name[32] 		= "U575 sample processes";
+VERSIONING	uint8_t	app_name[32] 		= "H563 sample processes";
 VERSIONING	uint8_t	app_version[32] 	= "1.0.0 rc 1";
 
 USRprcs_t	UserProcesses[USR_PROCESS_NUMBER] =

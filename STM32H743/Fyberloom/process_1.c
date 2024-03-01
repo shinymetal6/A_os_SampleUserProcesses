@@ -13,7 +13,8 @@
 void process_1(uint32_t process_id)
 {
 uint32_t	wakeup,flags;
-	create_timer(TIMER_ID_0,200,TIMERFLAGS_FOREVER | TIMERFLAGS_ENABLED);
+uint32_t	cnt=0;
+	create_timer(TIMER_ID_0,100,TIMERFLAGS_FOREVER | TIMERFLAGS_ENABLED);
 	while(1)
 	{
 		wait_event(EVENT_TIMER | EVENT_UART3_IRQ);
@@ -21,7 +22,14 @@ uint32_t	wakeup,flags;
 
 		if (( wakeup & WAKEUP_FROM_TIMER) == WAKEUP_FROM_TIMER)
 		{
-			HAL_GPIO_TogglePin(LED_GPIO_Port, LED_Pin);
+			cnt++;
+			if ( cnt == 8 )
+				HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin,GPIO_PIN_RESET);
+			else
+				HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin,GPIO_PIN_SET);
+			if ( cnt == 9 )
+				cnt = 0;
+
 		}
 	}
 }
