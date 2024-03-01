@@ -8,7 +8,7 @@
 #include "main.h"
 #include "A_os_includes.h"
 
-#ifdef	STM32H743xx
+#ifdef	FY_201023_00
 
 uint8_t step = 0;
 void step_leds(void)

@@ -8,7 +8,7 @@
 #include "main.h"
 #include "A_os_includes.h"
 
-#ifdef	STM32H743xx
+#ifdef	FY_201023_00
 
 void process_3(uint32_t process_id)
 {
