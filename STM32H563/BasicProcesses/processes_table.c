@@ -8,7 +8,7 @@
 #include "main.h"
 #include "A_os_includes.h"
 
-#ifdef	STM32U575xx
+#ifdef	STM32H563xx
 
 extern	void process_1(uint32_t process_id);		//This is process1
 extern	void process_2(uint32_t process_id);		//This is process2

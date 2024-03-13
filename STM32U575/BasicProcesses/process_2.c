@@ -21,7 +21,6 @@ uint32_t	wakeup,flags;
 		get_wakeup_flags(&wakeup,&flags);
 		if (( wakeup & WAKEUP_FROM_TIMER) == WAKEUP_FROM_TIMER)
 		{
-			HAL_GPIO_TogglePin(LED_2_GPIOPORT, LED_2_GPIOBIT);
 		}
 	}
 }
