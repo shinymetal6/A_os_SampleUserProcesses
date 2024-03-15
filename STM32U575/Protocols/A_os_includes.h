@@ -29,5 +29,4 @@
 #include <stdio.h>
 #include <string.h>
 
-
 #endif /* STM32U575_PROTOCOLS_A_OS_INCLUDES_H_ */

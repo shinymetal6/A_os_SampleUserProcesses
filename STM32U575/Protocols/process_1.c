@@ -49,9 +49,10 @@ uint8_t 	modbus_rx_buf[LOCAL_MODBUS_BUFFERLEN];
 
 void process_1(uint32_t process_id)
 {
-uint32_t	wakeup,flags;
-	allocate_hw(HW_UART3,0);
-	modbus_init(HW_UART3,LOCAL_MODBUS_ADDRESS,modbus_rx_buf,LOCAL_MODBUS_BUFFERLEN);
+uint32_t	wakeup,flags,modbus_error=0;
+	allocate_hw(HW_UART1,0);
+	if ( modbus_init(HW_UART1,LOCAL_MODBUS_ADDRESS,modbus_rx_buf,LOCAL_MODBUS_BUFFERLEN) != 0 )
+		modbus_error=1;
 
 	create_timer(TIMER_ID_0,100,TIMERFLAGS_FOREVER | TIMERFLAGS_ENABLED);
 	while(1)
@@ -61,17 +62,22 @@ uint32_t	wakeup,flags;
 
 		if (( wakeup & WAKEUP_FROM_TIMER) == WAKEUP_FROM_TIMER)
 		{
-			HAL_GPIO_TogglePin(LED_3_GPIOPORT, LED_3_GPIOBIT);
-			if ( modbus_get_coil(0) )
-				HAL_GPIO_WritePin(LED_1_GPIOPORT, LED_1_GPIOBIT,GPIO_PIN_SET);
+			if ( modbus_error == 0 )
+			{
+				HAL_GPIO_TogglePin(LED_3_GPIOPORT, LED_3_GPIOBIT);
+				if ( modbus_get_coil(0) )
+					HAL_GPIO_WritePin(LED_1_GPIOPORT, LED_1_GPIOBIT,GPIO_PIN_SET);
+				else
+					HAL_GPIO_WritePin(LED_1_GPIOPORT, LED_1_GPIOBIT,GPIO_PIN_RESET);
+				if ( modbus_get_coil(1) )
+					HAL_GPIO_WritePin(LED_2_GPIOPORT, LED_2_GPIOBIT,GPIO_PIN_SET);
+				else
+					HAL_GPIO_WritePin(LED_2_GPIOPORT, LED_2_GPIOBIT,GPIO_PIN_RESET);
+			}
 			else
-				HAL_GPIO_WritePin(LED_1_GPIOPORT, LED_1_GPIOBIT,GPIO_PIN_RESET);
-			if ( modbus_get_coil(1) )
-				HAL_GPIO_WritePin(LED_2_GPIOPORT, LED_2_GPIOBIT,GPIO_PIN_SET);
-			else
-				HAL_GPIO_WritePin(LED_2_GPIOPORT, LED_2_GPIOBIT,GPIO_PIN_RESET);
+				HAL_GPIO_WritePin(LED_3_GPIOPORT, LED_3_GPIOBIT,GPIO_PIN_SET);
 		}
-		if (( wakeup & WAKEUP_FROM_UART3_IRQ) == WAKEUP_FROM_UART3_IRQ)
+		if (( wakeup & WAKEUP_FROM_UART1_IRQ) == WAKEUP_FROM_UART1_IRQ)
 		{
 			if (( flags & WAKEUP_FLAGS_UART_RX) == WAKEUP_FLAGS_UART_RX )
 			{
