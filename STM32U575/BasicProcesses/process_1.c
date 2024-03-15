@@ -9,7 +9,7 @@
 #include "A_os_includes.h"
 
 #ifdef	STM32U575xx
-
+#ifdef DCC_ENABLE
 #define	DCC1_CHANNEL		TIM_CHANNEL_1
 #define	CUTOUT1_CHANNEL		TIM_CHANNEL_2
 #define	DCC2_CHANNEL		TIM_CHANNEL_1
@@ -87,5 +87,20 @@ uint32_t	track2 = DCC_TRACK_2;
 		}
 	}
 }
+#else
+void process_1(uint32_t process_id)
+{
+uint32_t	wakeup,flags;
 
+	create_timer(TIMER_ID_0,1000,TIMERFLAGS_FOREVER | TIMERFLAGS_ENABLED);
+	while(1)
+	{
+		wait_event(EVENT_TIMER);
+		get_wakeup_flags(&wakeup,&flags);
+		if (( wakeup & WAKEUP_FROM_TIMER) == WAKEUP_FROM_TIMER)
+		{
+		}
+	}
+}
+#endif // #ifdef DCC_ENABLE
 #endif //#ifdef	STM32H563xx

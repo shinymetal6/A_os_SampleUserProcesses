@@ -10,15 +10,15 @@
 
 #ifdef	STM32U575xx
 
-#ifdef	USE_XMODEM
+#ifdef	XMODEM_ENABLE
 
 #define	xmodem_data_area	0x20020000
 
 void process_1(uint32_t process_id)
 {
 uint32_t	wakeup,flags;
-	allocate_hw(HW_UART3,0);
-	xmodem_init(HW_UART3,(uint8_t *)xmodem_data_area);
+	allocate_hw(HW_UART1,0);
+	xmodem_init(HW_UART1,(uint8_t *)xmodem_data_area);
 	create_timer(TIMER_ID_0,100,TIMERFLAGS_FOREVER | TIMERFLAGS_ENABLED);
 	while(1)
 	{
@@ -43,7 +43,7 @@ uint32_t	wakeup,flags;
 }
 #endif
 
-#ifdef	USE_MODBUS
+#ifdef	MODBUS_ENABLE
 #define	LOCAL_MODBUS_BUFFERLEN		513
 uint8_t 	modbus_rx_buf[LOCAL_MODBUS_BUFFERLEN];
 #define	LOCAL_MODBUS_ADDRESS		1
