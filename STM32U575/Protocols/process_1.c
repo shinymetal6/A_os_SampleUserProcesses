@@ -22,16 +22,15 @@ uint32_t	wakeup,flags;
 	create_timer(TIMER_ID_0,100,TIMERFLAGS_FOREVER | TIMERFLAGS_ENABLED);
 	while(1)
 	{
-		wait_event(EVENT_TIMER | EVENT_UART3_IRQ);
+		wait_event(EVENT_TIMER | EVENT_UART1_IRQ);
 		get_wakeup_flags(&wakeup,&flags);
 
 		if (( wakeup & WAKEUP_FROM_TIMER) == WAKEUP_FROM_TIMER)
 		{
 			xmodem_process(wakeup);
 			HAL_GPIO_TogglePin(LED_3_GPIOPORT, LED_3_GPIOBIT);
-
 		}
-		if (( wakeup & WAKEUP_FROM_UART3_IRQ) == WAKEUP_FROM_UART3_IRQ)
+		if (( wakeup & WAKEUP_FROM_UART1_IRQ) == WAKEUP_FROM_UART1_IRQ)
 		{
 			if (( flags & WAKEUP_FLAGS_UART_RX) == WAKEUP_FLAGS_UART_RX )
 			{
