@@ -12,22 +12,18 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  *
  * Project : A_os
- */
+*/
 /*
- * A_os_includes.h
+ * system_ovverrides.h
  *
- *  Created on: Mar 15, 2024
+ *  Created on: Mar 16, 2024
  *      Author: fil
  */
 
-#ifndef STM32U575_PROTOCOLS_A_OS_INCLUDES_H_
-#define STM32U575_PROTOCOLS_A_OS_INCLUDES_H_
+#ifndef STM32U575_PROTOCOLS_SYSTEM_OVVERRIDES_H_
+#define STM32U575_PROTOCOLS_SYSTEM_OVVERRIDES_H_
 
-#include "../../../A_os/kernel/A.h"
-#include "../../../A_os/kernel/system_default.h"
-#include "../../../A_os/kernel/A_exported_functions.h"
-#include "system_ovverrides.h"
-#include <stdio.h>
-#include <string.h>
+#define		USE_XMODEM		1
+//#define		USE_MODBUS		1
 
-#endif /* STM32U575_PROTOCOLS_A_OS_INCLUDES_H_ */
+#endif /* STM32U575_PROTOCOLS_SYSTEM_OVVERRIDES_H_ */

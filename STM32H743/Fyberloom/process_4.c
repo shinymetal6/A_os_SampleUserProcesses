@@ -96,17 +96,15 @@ uint32_t	cycle=0;
 		if (( wakeup & WAKEUP_FROM_TIMER) == WAKEUP_FROM_TIMER)
 		{
 			wakeup=0;
-			/*
 			cycle++;
 			cycle &= 1;
 			if ( cycle )
 				all_on();
 			else
 				all_off();
-				*/
 			step_leds();
 		}
 	}
 }
 
-#endif // #ifdef	STM32H743xx
+#endif // #ifdef	FY_201023_01

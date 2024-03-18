@@ -10,7 +10,7 @@
 
 #ifdef	STM32U575xx
 
-#ifdef	XMODEM_ENABLE
+#ifdef	USE_XMODEM
 
 #define	xmodem_data_area	0x20020000
 
@@ -42,7 +42,7 @@ uint32_t	wakeup,flags;
 }
 #endif
 
-#ifdef	MODBUS_ENABLE
+#ifdef	USE_MODBUS
 #define	LOCAL_MODBUS_BUFFERLEN		513
 uint8_t 	modbus_rx_buf[LOCAL_MODBUS_BUFFERLEN];
 #define	LOCAL_MODBUS_ADDRESS		1
