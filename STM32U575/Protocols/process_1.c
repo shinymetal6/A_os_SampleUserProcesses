@@ -10,6 +10,9 @@
 
 #ifdef	STM32U575xx
 
+//#define	USE_XMODEM
+#define	USE_MODBUS
+
 #ifdef	USE_XMODEM
 
 #define	xmodem_data_area	0x20020000
@@ -91,5 +94,5 @@ uint32_t	wakeup,flags,modbus_error=0;
 }
 #endif
 
-#endif // #ifdef	STM32H563xx
+#endif // #ifdef	STM32U575xx
 
