@@ -28,13 +28,5 @@
 #include "../../../A_os/kernel/A_exported_functions.h"
 #include <stdio.h>
 #include <string.h>
-#ifdef	STM32H563xx
-
-//#define	USE_MODBUS
-#ifndef USE_MODBUS
-#define	USE_XMODEM
-#endif
-
-#endif	//#ifdef	STM32H743xx
 
 #endif /* STM32H743_BASICPROCESSES_A_OS_INCLUDES_H_ */
