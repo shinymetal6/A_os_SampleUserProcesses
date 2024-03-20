@@ -9,8 +9,8 @@
 #include "A_os_includes.h"
 #ifdef	STM32H563xx
 
-//#define	USE_XMODEM
-#define	USE_MODBUS
+#define	USE_XMODEM
+//#define	USE_MODBUS
 
 #ifdef	USE_XMODEM
 
