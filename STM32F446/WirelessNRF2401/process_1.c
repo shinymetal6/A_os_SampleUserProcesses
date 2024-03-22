@@ -42,7 +42,7 @@ void process_1(uint32_t process_id)
 {
 uint32_t	wakeup,flags;
 
-	allocate_hw_with_irq_callback(HW_SPI2,HW_NRF24L01,HWMAN_STD_IRQ,A_os_nrf24l01_callback);
+	allocate_hw_with_irq_callback(HW_SPI2,HWDEV_NRF24L01,HWDEV_STATUS_PRC_WAKEUP,A_os_nrf24l01_callback);
 	create_timer(TIMER_ID_0,1000,TIMERFLAGS_FOREVER | TIMERFLAGS_ENABLED);
 	nrf24l01_init(2500, NRF24L01_2Mbps, NRF24L01_MODE_TX,nrf_address);
 	while(1)
@@ -52,28 +52,31 @@ uint32_t	wakeup,flags;
 
 		if (( wakeup & WAKEUP_FROM_TIMER) == WAKEUP_FROM_TIMER)
 		{
-			HAL_GPIO_TogglePin(LED_2_GPIOPORT, LED_2_GPIOBIT);
 			nrf24l01_tx(tx_data , nrf_address);	// tx buffer
 		}
-		if (( wakeup & WAKEUP_FROM_NRF24L01_IRQ) == WAKEUP_FROM_NRF24L01_IRQ)
+		if (( wakeup & WAKEUP_FROM_SPI2_IRQ) == WAKEUP_FROM_SPI2_IRQ)
 		{
-			nrf24l01_irq = nrf24l01_get_status();
-			if ( nrf24l01_irq & NRF24L01_IRQ_IS_TX_DS )
+			if (( flags & HWDEV_NRF24L01) == HWDEV_NRF24L01)
 			{
-				HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
-				nrf24l01_get_tx_irq_goto_rx();
-				nrf24l01_txds++;
-				task_delay(5);
-			}
-			if ( nrf24l01_irq & NRF24L01_IRQ_IS_TX_DR )
-			{
-				nrf24l01_rx(rx_data);
-				nrf24l01_txdr++;
-				task_delay(150);
-			}
-			if ( nrf24l01_irq & NRF24L01_IRQ_IS_MAX_RT )
-			{
-				nrf24l01_maxrt++;
+				HAL_GPIO_TogglePin(LED_2_GPIOPORT, LED_2_GPIOBIT);
+				nrf24l01_irq = nrf24l01_get_status();
+				if ( nrf24l01_irq & NRF24L01_IRQ_IS_TX_DS )
+				{
+					HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
+					nrf24l01_get_tx_irq_goto_rx();
+					nrf24l01_txds++;
+					task_delay(5);
+				}
+				if ( nrf24l01_irq & NRF24L01_IRQ_IS_TX_DR )
+				{
+					nrf24l01_rx(rx_data);
+					nrf24l01_txdr++;
+					task_delay(150);
+				}
+				if ( nrf24l01_irq & NRF24L01_IRQ_IS_MAX_RT )
+				{
+					nrf24l01_maxrt++;
+				}
 			}
 		}
 	}
