@@ -10,10 +10,9 @@
 
 #ifdef	STM32U575xx
 
-//#define	USE_XMODEM
-#define	USE_MODBUS
-
-#ifdef	USE_XMODEM
+#define	LOCAL_DMX_ENABLE
+#ifndef	LOCAL_DMX_ENABLE
+#ifdef	XMODEM_ENABLE
 
 #define	xmodem_data_area	0x20020000
 
@@ -45,7 +44,7 @@ uint32_t	wakeup,flags;
 }
 #endif
 
-#ifdef	USE_MODBUS
+#ifdef	MODBUS_ENABLE
 #define	LOCAL_MODBUS_BUFFERLEN		513
 uint8_t 	modbus_rx_buf[LOCAL_MODBUS_BUFFERLEN];
 #define	LOCAL_MODBUS_ADDRESS		1
@@ -60,7 +59,7 @@ uint32_t	wakeup,flags,modbus_error=0;
 	create_timer(TIMER_ID_0,100,TIMERFLAGS_FOREVER | TIMERFLAGS_ENABLED);
 	while(1)
 	{
-		wait_event(EVENT_TIMER | EVENT_UART3_IRQ);
+		wait_event(EVENT_TIMER | EVENT_UART1_IRQ);
 		get_wakeup_flags(&wakeup,&flags);
 
 		if (( wakeup & WAKEUP_FROM_TIMER) == WAKEUP_FROM_TIMER)
@@ -93,6 +92,25 @@ uint32_t	wakeup,flags,modbus_error=0;
 	}
 }
 #endif
+#else
+void process_1(uint32_t process_id)
+{
+uint32_t	wakeup,flags;
+	allocate_hw(HW_UART3,0);
+	dmx512_init(HW_UART3);
+	create_timer(TIMER_ID_0,100,TIMERFLAGS_FOREVER | TIMERFLAGS_ENABLED);
+	while(1)
+	{
+		wait_event(EVENT_TIMER | EVENT_UART3_IRQ);
+		get_wakeup_flags(&wakeup,&flags);
+		if (( wakeup & WAKEUP_FROM_TIMER) == WAKEUP_FROM_TIMER)
+		{
+			dmx512_start();
+			HAL_GPIO_TogglePin(LED_3_GPIOPORT, LED_3_GPIOBIT);
+		}
+	}
+}
+#endif // #define	LOCAL_DMX_ENABLE
 
-#endif // #ifdef	STM32U575xx
+#endif // #ifdef	STM32H563xx
 
